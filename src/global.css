@@ -112,6 +112,84 @@ a {
 background-color: #3874ff;
 color: white;
 }
+
+.previewSearch {
+  display: block;
+  width: 300px;
+  height: 400px;
+  background-color: #18181c;
+  border: 2px solid #22262e;
+  margin-top: 8px;
+  border-radius: .3rem;
+  overflow-y: scroll;
+ scroll-behavior: smooth;
+ padding: 10px 20px;
+ position: absolute;
+ 
+}
+
+.previewSearch ul {
+  list-style: none;
+}
+
+.previewSearch.hide{
+  display: none;
+}
+.previewSearch::-webkit-scrollbar {
+  display: none;
+}
+.previewSearch .item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid #22262e;
+  padding: 1rem;
+ 
+  
+}
+
+.loader {
+  margin-left: 86px;
+  margin-top: 140px;
+  margin-bottom: 200px;
+}
+
+.previewSearch p {
+  margin-left: 10px;
+}
+
+.searchBox {
+  margin-top: 50px;
+  position: relative;
+}
+
+.searchBox input {
+  width: 300px;
+  height: 50px;
+  padding: 10px;
+  color: #fff;
+  background-color: #23242e;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.searchBox input:focus{
+  outline: none;
+}
+
+.searchBox select {
+  background-color: #23242e;
+  color: #fff;
+  border-radius: 5px;
+  margin-left: 20px;
+  padding:0 10px;
+  height: 50px;
+}
+
+.searchBox select:focus {
+  outline: none;
+}
 @media (max-width : 600px) {
   .table {
     display: block;
