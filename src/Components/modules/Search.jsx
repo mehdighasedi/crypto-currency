@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import { searchList } from "../../services/CoinApi";
+import { marketChart, searchList } from "../../services/CoinApi";
 import toast from "react-hot-toast";
 import { Rings } from "react-loader-spinner";
 
-function Search({ currency, setCurrency }) {
+function Search({ currency, setCurrency, setChart, coins }) {
   const [searchedText, setSearchedText] = useState("");
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchedCoins, setSearchedCoins] = useState([]);
@@ -31,11 +31,12 @@ function Search({ currency, setCurrency }) {
         setSearchLoading(false);
       }
     }
-
     search();
 
     return () => controller.abort();
   }, [searchedText]);
+
+  console.log(searchedCoins);
   return (
     <div className="searchBox">
       <input
@@ -65,12 +66,13 @@ function Search({ currency, setCurrency }) {
         )}
         <ul>
           {searchedCoins.map((coin) => (
-            <li key={coin.id}>
-              <div className="item">
-                <img src={coin.thumb} alt={coin.name} />
-                <p>{coin.name}</p>
-              </div>
-            </li>
+            <SearchList
+              key={coin.id}
+              coin={coin}
+              setChart={setChart}
+              currency={currency}
+              coins={coins}
+            />
           ))}
         </ul>
       </div>
@@ -79,3 +81,24 @@ function Search({ currency, setCurrency }) {
 }
 
 export default Search;
+
+function SearchList({ coin, setChart, coins, currency }) {
+  const { thumb, name, id } = coin;
+  async function handleSearchShow() {
+    try {
+      const { data } = await axios.get(marketChart(id, currency));
+      setChart({ ...data, coin });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+
+  return (
+    <li>
+      <div className="item" onClick={handleSearchShow}>
+        <img src={thumb} alt={name} />
+        <p>{name}</p>
+      </div>
+    </li>
+  );
+}

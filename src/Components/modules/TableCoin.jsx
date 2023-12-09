@@ -1,8 +1,11 @@
 import chartUp from "../../assets/chart-up.svg";
 import chartDown from "../../assets/chart-down.svg";
 import { Rings } from "react-loader-spinner";
+import axios from "axios";
+import { marketChart } from "../../services/CoinApi";
+import toast from "react-hot-toast";
 
-function TableCoin({ coins, isLoading, currency }) {
+function TableCoin({ coins, isLoading, currency, setChart }) {
   if (isLoading)
     return (
       <Rings
@@ -31,7 +34,12 @@ function TableCoin({ coins, isLoading, currency }) {
         </thead>
         <tbody>
           {coins.map((coin) => (
-            <TableRow key={coin.id} {...coin} currency={currency} />
+            <TableRow
+              key={coin.id}
+              coin={coin}
+              currency={currency}
+              setChart={setChart}
+            />
           ))}
         </tbody>
       </table>
@@ -41,19 +49,29 @@ function TableCoin({ coins, isLoading, currency }) {
 
 export default TableCoin;
 
-function TableRow({
-  image,
-  name,
-  symbol,
-  current_price,
-  price_change_percentage_24h,
-  total_volume,
-  currency,
-}) {
+function TableRow({ coin, setChart, currency }) {
+  const {
+    image,
+    name,
+    symbol,
+    current_price,
+    price_change_percentage_24h,
+    total_volume,
+    id,
+  } = coin;
+
+  async function handleShow() {
+    try {
+      const { data } = await axios.get(marketChart(id, currency));
+      setChart({ ...data, coin });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
   return (
     <tr>
       <td>
-        <div className="symbol">
+        <div className="symbol" onClick={handleShow}>
           <img src={image} alt={name} />
           <span>{symbol.toUpperCase()}</span>
         </div>

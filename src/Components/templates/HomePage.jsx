@@ -5,12 +5,15 @@ import TableCoin from "../modules/TableCoin";
 import toast from "react-hot-toast";
 import Pagination from "../modules/Pagination";
 import Search from "../modules/Search";
+import ChartModal from "../modules/ChartModal";
 
 function HomePage() {
   const [coins, setCoins] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [currency, setCurrency] = useState("usd");
+  const [chart, setChart] = useState(null);
+  const [type, setType] = useState("prices");
 
   useEffect(() => {
     async function fetchCoins() {
@@ -30,9 +33,28 @@ function HomePage() {
   }, [page, currency]);
   return (
     <div>
-      <Search currency={currency} setCurrency={setCurrency} />
-      <TableCoin coins={coins} currency={currency} isLoading={isLoading} />
+      <Search
+        currency={currency}
+        setCurrency={setCurrency}
+        setChart={setChart}
+        chart={chart}
+        coins={coins}
+      />
+      <TableCoin
+        coins={coins}
+        currency={currency}
+        isLoading={isLoading}
+        setChart={setChart}
+      />
       <Pagination page={page} setPage={setPage} />
+      {!!chart && (
+        <ChartModal
+          chart={chart}
+          type={type}
+          setType={setType}
+          setChart={setChart}
+        />
+      )}
     </div>
   );
 }
