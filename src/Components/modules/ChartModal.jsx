@@ -39,7 +39,7 @@ function ChartModal({ chart, setChart, type, setType }) {
             <ChartComponents type={type} data={convertData(chart, type)} />
           )}
         </div>
-        <div className={!chart.ath ? "null" : "hide"}>
+        {!chart.ath ? (
           <BottonDetails>
             <div className="types">
               <button>Prices</button>
@@ -61,7 +61,9 @@ function ChartModal({ chart, setChart, type, setType }) {
               </div>
             </div>
           </BottonDetails>
-        </div>
+        ) : (
+          <BottonDetails />
+        )}
         <button className="btnClose" onClick={() => setChart(null)}>
           Close
         </button>
