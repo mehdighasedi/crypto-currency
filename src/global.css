@@ -228,6 +228,7 @@ display: none;
   background-color: transparent;
   color: #fff;
   cursor: pointer;
+  margin-left: 40%;
   font-weight: 600;
   transition: all 0.2s ease-in;
 }
@@ -256,6 +257,67 @@ display: none;
 .names p {
   font-size: 1.5rem;
   font-weight: 700;
+}
+.types {
+display: flex;
+justify-content: space-evenly;
+}
+.types button {
+  margin: 10px 20px;
+  background-color: #18181ce6;
+  border: 1px solid #3874ff;
+  color: #3874ff;
+  font-size: 1rem;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+.types button:hover {
+  background-color: #6685cc;
+  color: #fff;
+}
+
+.types .selected {
+  background-color: #3874ff;
+  color: #fff;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 20px 0;
+}
+.details div {
+  display: flex;
+  font-size: 1.1rem;
+}
+.details p {
+  margin-right: 7px;
+  color: #3874ff;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #3874ff;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.footer {
+  text-align: center;
+  background-color: #3874ff;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.footer a:hover {
+  color: #23242e;
 }
 @media (max-width : 600px) {
   .table {

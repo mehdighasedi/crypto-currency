@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import Pagination from "../modules/Pagination";
 import Search from "../modules/Search";
 import ChartModal from "../modules/ChartModal";
+import Layout from "../../layout/Layout";
 
 function HomePage() {
   const [coins, setCoins] = useState([]);
@@ -32,7 +33,7 @@ function HomePage() {
     fetchCoins();
   }, [page, currency]);
   return (
-    <div>
+    <Layout>
       <Search
         currency={currency}
         setCurrency={setCurrency}
@@ -55,7 +56,7 @@ function HomePage() {
           setChart={setChart}
         />
       )}
-    </div>
+    </Layout>
   );
 }
 

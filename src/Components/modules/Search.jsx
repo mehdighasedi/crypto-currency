@@ -84,10 +84,12 @@ export default Search;
 
 function SearchList({ coin, setChart, coins, currency }) {
   const { thumb, name, id } = coin;
+  const { market_cap, ath, current_price } = coins;
+
   async function handleSearchShow() {
     try {
       const { data } = await axios.get(marketChart(id, currency));
-      setChart({ ...data, coin });
+      setChart({ ...data, coin, market_cap, ath, current_price });
     } catch (error) {
       toast.error(error.message);
     }
